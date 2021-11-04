@@ -1,0 +1,21 @@
+{% for item in items %}
+    <div class="col-xl-{{ item.col ? item.col : 3 }} col-sm-12 col-lg-{{ item.col ? item.col : 3 * 2 }} col-12 stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-6">
+                        <h4 class="card-title">
+                            {{ trans(item.name) }}</h4>
+                        <h4 class="text-{{ item.color }} font-weight-bold mb-2">{{ item.value }}</h4>
+                    </div>
+
+                    <div class="col-6">
+                        <i class="{{ item.icon }} text-{{ item.color }} float-right fa-5x"></i>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endfor %}
