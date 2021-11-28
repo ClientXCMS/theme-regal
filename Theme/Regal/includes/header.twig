@@ -20,6 +20,8 @@
                         </a>
                     </li>
                 {% endif %}
+                
+                {% if setting('disabled_changelocale') != 'true' %}
                 <li class="nav-item dropdown d-flex mr-4">
                     <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center" id="localeDropdown" href="#" data-toggle="dropdown">
                         <i class="fas fa-language text-primary"></i>
@@ -35,6 +37,8 @@
                         {% endfor %}
                     </div>
                 </li>
+                
+                {% endif %}
                 {% if current_user() and current_user().confirmed() %}
 
                     <li class="nav-item dropdown d-flex mr-4 ">
@@ -49,8 +53,8 @@
                                     <a href="{{ path('account.emails.show', {id: mail.id}) }}"
                                        class="dropdown-item preview-item">
                                         <div class="dropdown-item-desc">
-                                            <b>{{ mail.data.subject }}</b>
-                                            <p>{{ mail.data.introLines[0] }}</p>
+                                            <b>{{ mail.data.subject  |raw }}</b>
+                                            <p>{{ mail.data.introLines[0]  |raw }}</p>
                                             <div class="time">{{ mail.createdAt | ago }}</div>
                                         </div>
                                     </a>
