@@ -53,8 +53,8 @@
                                     <a href="{{ path('account.emails.show', {id: mail.id}) }}"
                                        class="dropdown-item preview-item">
                                         <div class="dropdown-item-desc">
-                                            <b>{{ mail.data.subject  |raw }}</b>
-                                            <p>{{ mail.data.introLines[0]  |raw }}</p>
+                                            <b>{{ mail.subject |raw }}</b>
+                                            <p>{{ mail.content | excerpt() | raw }}</p>
                                             <div class="time">{{ mail.createdAt | ago }}</div>
                                         </div>
                                     </a>
