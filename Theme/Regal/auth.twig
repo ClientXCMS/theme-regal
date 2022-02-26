@@ -11,7 +11,7 @@
                               <div class="brand-logo">
                                  
             {% if config('app.logo') is not empty %}
-              <img src="{{ config('app.logo')  }}" alt="logo">
+              <img src="{{ config('app.logo')  }}" alt="logo" style="width: auto; max-width: 350px; max-height: 200px;">
             {% endif %}
             </div>
                               <h3>{{ block('title') }}</h3>

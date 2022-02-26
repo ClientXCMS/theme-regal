@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, shrink-to-fit=no" name="viewport">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>{{ title }} | {{ config('app.name') }}</title>
+    <title>{{ title | html_decode }} | {{ config('app.name') }}</title>
     {% if config('html.favicon') is not empty %}
         <link rel="icon" type="image/png" sizes="16x16" href="{{ config('html.favicon') }}">
     {% else %}
@@ -57,9 +57,15 @@
         .pricing-header {
             max-width: 700px;
         }
+		.article .article-details {
+		background:none;
+		}
         .btn {
             box-shadow: none!important;
         }
+		.sidebar .nav .nav-item .nav-link {
+			border:none!important;
+		}
         
         .menu-icon i {
 

@@ -1,0 +1,31 @@
+		<li class="nav-item {{ is_subpath(item.route)  ? 'active' : '' }}">
+
+			{% if item.items is not empty %}
+
+				<a class="nav-link" data-toggle="collapse" href="#tabs-{{ i }}" aria-expanded="false" aria-controls="tabs-{{ i }}">
+					<i class="{{ item.icon }} menu-icon"></i>
+					<span class="menu-title">{{ trans(item.name) }}</span>
+					<i class="menu-arrow"></i>
+				</a>
+				<div class="collapse  {% for link, content in item.items %}{{ _path == link ? 'show' }}{% endfor %}" id="tabs-{{ i }}">
+					<ul class="nav flex-column sub-menu">
+
+						{% for link, content in item.items %}
+							<li class="nav-item">
+								<a class="nav-link {{ _path == link ? 'active' ? : '' }}" href="{{ link }}">{{ content }}</a>
+							</li>
+						{% endfor %}
+					</ul>
+				</div>
+			{% else %}
+				<a class="nav-link" href="{{ path(item.route) }}" {%  if item.target %} target="{{ item.target }}" {% endif %}>
+					<i class="{{ item.icon }} menu-icon"></i>
+					<span class="menu-title">
+						{{ trans(item.name) }}
+					</span>
+					{% if item.value %}
+							<span class="badge badge-danger p-2">{{ item.value }}</span>
+					{% endif %}
+				</a>
+			{% endif %}
+		</li>
