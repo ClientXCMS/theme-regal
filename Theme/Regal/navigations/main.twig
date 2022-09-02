@@ -1,0 +1,24 @@
+{% if title %}
+
+	<li class="nav-link">
+		<div class="user-profile m-2 text-left" style="font-size:0.875rem">
+			<div class="user-name">
+				{{ trans(title) }}
+			</div>
+		</div>
+	</li>
+{% endif %}
+
+{% if current_user() %}
+    {% for i, item in online %}
+        {% include 'navigations/mainitems.twig' with {item: item, i:i} %}
+    {% endfor %}
+{% endif %}
+{% if current_user() == null %}
+    {% for i,item in offline %}
+    {% include 'navigations/mainitems.twig' with {item: item, i:i} %}
+    {% endfor %}
+{% endif %}
+{% for i,item in global %}
+    {% include 'navigations/mainitems.twig' with {item: item, i:i} %}
+{% endfor %}

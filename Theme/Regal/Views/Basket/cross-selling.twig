@@ -1,0 +1,14 @@
+{% if crosssellproducts is not empty %}
+    <div class="col-md-12">
+        <div class="card">
+            <div class="card-header">
+                <h4>{{ trans("cross_selling_title") }}</h4>
+            </div>
+            <div class="card-body row">
+                {% for crosssellproduct in crosssellproducts %}
+                    {{ include('@shop/product/card', {product: crosssellproduct}) }}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endif %}

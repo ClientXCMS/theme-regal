@@ -1,0 +1,37 @@
+<div class="col-md-12 col-xl-{{ col ? col : 4 }} col-sm-12 col-xs-6">
+<div class="col">
+    <div class="card mb-4 rounded-3 shadow-sm {{ product.pinned ? 'border-primary' }}">
+        <div class="card-body">
+            <h4 class="my-0 fw-normal">{{ product.name }}</h4>
+
+            {% if product.ribbon %}
+                <div class="ribbon-wrapper">
+                    <div class="ribbon ribbon-{{ product.ribbonColor }}">{{ product.ribbon | html_decode }}</div>
+                </div>
+            {% endif %}
+                <h6 class="card-title pricing-card-title">
+                    {% if product.discounted %}
+                        <del>
+                            {{ product.originalPrice(product.toRecurring().name) | formatted_price(true) | trans }} {{ product.toRecurring.translateKey | trans }}</del>
+                    {% endif %}
+                </h6>
+                <div class="pricing-price">
+                    <h4 class="text-warning">{% if product.free %}
+                            {{ trans("free") }}
+                        {% else %}
+                            {{ product.price(product.toRecurring().name) | formatted_price(true) | trans }} {{ product.toRecurring.translateKey | trans }}
+                        {% endif %}</h4>
+                    {% if product.setupfee(product.toRecurring().name) != 0 %}
+                        <p class="text-muted">{{ trans("setupfee") }}
+                            : {{ product.setupfee(product.toRecurring().name) | formatted_price(true, 'none') | trans }}</p>
+                    {% endif %}
+                </div>
+            <ul class="list-unstyled mt-3 mb-4">
+                {{ product.description | raw }}
+            </ul>
+
+            {{ include('@shop/btnnadd') }}
+        </div>
+    </div>
+</div>
+</div>
