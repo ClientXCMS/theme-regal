@@ -1,37 +1,48 @@
-<div class="col-md-12 col-xl-{{ col ? col : 4 }} col-sm-12 col-xs-6">
-<div class="col">
-    <div class="card mb-4 rounded-3 shadow-sm {{ product.pinned ? 'border-primary' }}">
-        <div class="card-body">
-            <h4 class="my-0 fw-normal">{{ product.name }}</h4>
+<div class="col-md-12 col-xl-4 col-lg-6 col-sm-12">
+    <div class="card card-body {{ product.pinned  ? 'pricing-highlight' : '' }}">
+        <div class="pricing-title">
+            {{ product.name }}
+        </div>
 
-            {% if product.ribbon %}
-                <div class="ribbon-wrapper">
-                    <div class="ribbon ribbon-{{ product.ribbonColor }}">{{ product.ribbon | html_decode }}</div>
-                </div>
-            {% endif %}
-                <h6 class="card-title pricing-card-title">
-                    {% if product.discounted %}
-                        <del>
-                            {{ product.originalPrice(product.toRecurring().name) | formatted_price(true) | trans }} {{ product.toRecurring.translateKey | trans }}</del>
-                    {% endif %}
-                </h6>
-                <div class="pricing-price">
-                    <h4 class="text-warning">{% if product.free %}
-                            {{ trans("free") }}
-                        {% else %}
-                            {{ product.price(product.toRecurring().name) | formatted_price(true) | trans }} {{ product.toRecurring.translateKey | trans }}
-                        {% endif %}</h4>
-                    {% if product.setupfee(product.toRecurring().name) != 0 %}
-                        <p class="text-muted">{{ trans("setupfee") }}
-                            : {{ product.setupfee(product.toRecurring().name) | formatted_price(true, 'none') | trans }}</p>
-                    {% endif %}
-                </div>
-            <ul class="list-unstyled mt-3 mb-4">
-                {{ product.description | raw }}
-            </ul>
+        {% if product.ribbon %}
+            <div class="ribbon-wrapper">
+                <div class="ribbon ribbon-{{ product.ribbonColor }}">{{ product.ribbon | html_decode }}</div>
+            </div>
+        {% endif %}
+        <div class="pricing-padding">
+            <h6>
+                {% if product.discounted %}
+                    <del>
+                        {{ product.originalPrice(product.toRecurring().name) | formatted_price(true) | trans }}</del>
+                {% endif %}
+            </h6>
+            <div class="pricing-price">
+                <h4 class="text-warning">{% if product.free %}
+                        {{ trans("free") }}
+                    {% else %}
+                        {{ product.price(product.toRecurring().name) | formatted_price(true) | trans }} {{ product.toRecurring.translateKey | trans }}
+                    {% endif %}</h4>
+                {% if product.setupfee(product.toRecurring().name) != 0 %}
+                    <p class="text-muted">{{ trans("setupfee") }}
+                        : {{ product.setupfee(product.toRecurring().name) | formatted_price(true, 'none') | trans }}</p>
+                {% endif %}
+                {% if product.inStockWarning(setting('stock_warning', "-1")) %}
+                    <p class="badge badge-warning">{{ trans("instock", {"%count%": product.stock}) }}</p>
 
-            {{ include('@shop/btnnadd') }}
+                {% elseif product.stockcontrol %}
+                    {% if product.stock <= 0 %}
+                        <span class="badge badge-danger">{{ trans("out_stock") }}</span>
+                    {% else %}
+                        <span class="badge badge-success">{{ trans("instock", {"%count%": product.stock}) }}</span>
+                    {% endif %}
+                {% endif %}
+                <div class="pricing-details">
+                </div>
+                {{ product.description  | raw }}
+            </div>
+        </div>
+        <div class="pricing-cta">
+            {{ include('@shop/btnadd', {product: product}) }}
         </div>
     </div>
-</div>
 </div>

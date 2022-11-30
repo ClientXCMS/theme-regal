@@ -81,9 +81,7 @@
         <link rel="stylesheet" href="{{ theme_asset('css/style.css') }}">
     {% endif %}
 
-    {% if current_route().name != 'welcome' %}
         <link rel="stylesheet" href="{{ theme_global('clientx.css') }}">
-    {% endif %}
     {% if mail_messages() is empty %}
         <style>
             .dropdown-list .dropdown-list-content {
