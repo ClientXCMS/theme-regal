@@ -66,6 +66,7 @@
                                 </div>
                         </div>
                     </li>
+                    {% endif %}
 
                     <li class="nav-item dropdown d-flex mr-4 ">
                         <a class="nav-link count-indicator dropdown-toggle d-flex align-items-center justify-content-center text-primary" id="userDropdown" href="#" data-toggle="dropdown">
@@ -78,9 +79,12 @@
                             <a href="{{ path('account.details') }}" class="preview-item dropdown-item has-icon">
                                 <i class="fa fa-user-edit"></i> <span>{{ trans("account.details.title") }}</span>
                             </a>
+                            
+                {% if current_user() and current_user().confirmed() %}
                             <a href="{{ path('account.emails') }}" class="preview-item dropdown-item has-icon">
                                 <i class="fa fa-envelope"></i> <span>{{ trans("account.emails.title") }}</span>
                             </a>
+                            {% endif %}
                             <a href="{{ path('account.activity') }}" class="preview-item dropdown-item has-icon">
                                 <i class="fa fa-chart-line"></i> <span>{{ trans("account.activity.title") }}</span>
                             </a>
