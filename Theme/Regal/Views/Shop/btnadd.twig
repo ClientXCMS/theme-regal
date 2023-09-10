@@ -2,7 +2,7 @@
 {% if product.stockcontrol == "0" or (product.stockcontrol == '1' and product.stock != 0) %}
         {% if product.ondemand %}
 
-            <a class="btn btn-lg btn-block w-100 btn btn-primary" href="{{ path('support.submit') }}">
+            <a class="btn btn-lg btn-block w-100 btn btn-primary" href="{{ setting('ondemand_redirect', path('support.submit')) }}">
                 {{ trans("shopadmin.product.ondemand") }}
                 <i class="fas fa-arrow-right"></i>
             </a>
